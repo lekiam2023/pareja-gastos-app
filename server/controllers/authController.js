@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs');
-const { createToken } = requiere('../utils/jwt');
+const { createToken } = require('../utils/jwt');
 const User = require('../models/User');
 
 const login = async (req, res) => {

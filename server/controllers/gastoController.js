@@ -1,4 +1,4 @@
-const Gasto = require('../module/Gasto');
+const Gasto = require('../models/Gasto');
 
 const crearGasto = async (req, res) => {
  const {descripcion, monto, fecha} = req.body;
