@@ -1,3 +1,6 @@
+/*Este archivo se encarga de inicializar el servidor
+Tambien es donde estan todos los middlewares de rutas y configuracion de respuestas
+*/
 const express = require('express');
 require('dotenv').config();
 const cors = require('cors');
