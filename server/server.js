@@ -1,12 +1,22 @@
 const express = require('express');
 require('dotenv').config();
 const cors = require('cors');
+const pingRoutes = require('./routes/pingRoutes');
 
 const authRoutes = require('./routes/authRoutes');
 const gastosRoutes = require('./routes/gastoRoutes');
-const pagarRoutes = require('./routes/pagarRoutes');
+const pagarRoutes = require('./routes/pingRoutes');
 
 const app = express();
+
+/*Middlewares Globales*/
+app.use(cors({
+    origin:'http://localhost:3000'
+}));
+app.use('/ping', pingRoutes);
+
+//Rutas
+app.use('/ping', pingRoutes);
 app.use('/api/login', authRoutes);
 app.use('/api/gastos', gastosRoutes);
 app.use('/api/pagar', pagarRoutes);
