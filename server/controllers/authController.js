@@ -1,6 +1,6 @@
-const bcrypt = require('bcryptjs');
-const { createToken } = require('../utils/jwt');
-const User = require('../models/User');
+const bcrypt = require('bcryptjs');//Importamos libreria para que las contraseñas sen hasheadas y protegidas al mezclarse con el "sal" 
+const { createToken } = require('../utils/jwt');//Aca importamos el JSON WEB TOKEN, para que los usuarios que ingresen tengan un TOKEN de seguridad
+const User = require('../models/User');//Importamos los usuarios extraidos por las query de la base de datos
 
 const login = async (req, res) => {
 
@@ -12,7 +12,7 @@ const login = async (req, res) => {
    if (!user) return res.status(404).json({error:"Usuario no encontrado"});
 
    //Comparar contraseñas usando bcrypt
-   const isPasswordCorrect = await bcrypt.compare(password, user.password);
+   const isPasswordCorrect = await bcrypt.compare(password, User.password);
    if(!isPasswordCorrect) return res.status(401).json({error:"Contraseña incorrecta"});
 
    //Genera el token con la info del usuario

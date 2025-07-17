@@ -4,11 +4,11 @@ Tambien es donde estan todos los middlewares de rutas y configuracion de respues
 const express = require('express');
 require('dotenv').config();
 const cors = require('cors');
-const pingRoutes = require('./routes/pingRoutes');
 
+const pingRoutes = require('./routes/pingRoutes');
 const authRoutes = require('./routes/authRoutes');
 const gastosRoutes = require('./routes/gastoRoutes');
-const pagarRoutes = require('./routes/pingRoutes');
+const pagarRoutes = require('./routes/pagarRoutes');
 
 const app = express();
 
@@ -16,7 +16,7 @@ const app = express();
 app.use(cors({
     origin:'http://localhost:3000'
 }));
-app.use('/ping', pingRoutes);
+
 
 //Rutas
 app.use('/ping', pingRoutes);

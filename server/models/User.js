@@ -10,4 +10,4 @@ const findById = async (id) =>{
  return rows[0];
 };
 
-module.exports ={ findByEmail, findById };
+module.exports = { findByEmail, findById };
