@@ -1,6 +1,6 @@
 const db = require('../config/db');
 
-const  getByUser = async (userId) => {
+const getByUser = async (userId) => {
    const [rows] = await db.query("SELECT * FROM gastos WHERE user_id = ?",[userId]);
    return rows; 
 };

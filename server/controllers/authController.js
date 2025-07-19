@@ -12,7 +12,7 @@ const login = async (req, res) => {
    if (!user) return res.status(404).json({error:"Usuario no encontrado"});
 
    //Comparar contraseñas usando bcrypt
-   const isPasswordCorrect = await bcrypt.compare(password, User.password);
+   const isPasswordCorrect = await bcrypt.compare(password, user.password);
    if(!isPasswordCorrect) return res.status(401).json({error:"Contraseña incorrecta"});
 
    //Genera el token con la info del usuario
