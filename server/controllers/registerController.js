@@ -26,6 +26,7 @@ const registerUser = async (req, res) =>{
         email: newUser.email,
         rol: newUser.rol,
     },
+    token
  });
  }catch(error){
     console.log('Error en el registro:', error);

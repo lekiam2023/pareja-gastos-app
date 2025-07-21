@@ -3,6 +3,7 @@ import API from '../services/api';
 
 
 function RegisterForm(){
+     const [nombre, setNombre] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [mensaje, setMensaje] = useState('');
@@ -14,7 +15,7 @@ function RegisterForm(){
         setError('');
 
         try{
-            const res = await API.post('/api/register', {email, password});
+            const res = await API.post('/api/register', {nombre, email, password});
             setMensaje('¡Usuario registrado exitosamente!');
             console.log('Respuesta:',res.data);
 
@@ -29,6 +30,14 @@ function RegisterForm(){
         <div style={{maxWidth: 300, margin:'auto'}}>
          <h2>Registro de Usuario</h2>
          <form onSubmit={handleRegister}>
+             <input 
+            type="text"
+            placeholder="Nombre"
+            value={nombre}
+            onChange={(e) => setNombre(e.target.value)}
+            required
+            style={{width: '100%', marginBottom: '10px'}}
+            />
             <input 
             type="email"
             placeholder="Correo"
