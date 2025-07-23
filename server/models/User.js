@@ -1,3 +1,10 @@
+/* ----Capa De Gestion Logica De Datos---
+Este archivo controla el acceso a la base de datos MySQL
+Realizando los QUERY: 
+-SELCET:(Para buscar los usuario de la tabla users por email y por id)
+-INSERT:(Para crear un nuevo usuario en la tabla)
+*/
+
 const db = require('../config/db');
 
 const findByEmail = async (email) => {

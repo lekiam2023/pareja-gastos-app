@@ -1,7 +1,14 @@
+/*  ---- Capa Logica De Negocio -----
+   
+
+
+*/
 const bcrypt = require('bcryptjs');//Importamos libreria para que las contraseñas sen hasheadas y protegidas al mezclarse con el "sal" 
 const { createToken } = require('../utils/jwt');//Aca importamos el JSON WEB TOKEN, para que los usuarios que ingresen tengan un TOKEN de seguridad
 const User = require('../models/User');//Importamos los usuarios extraidos por las query de la base de datos
 
+
+//Funcion asincrona que recibe una promesa del modulo de model/User
 const login = async (req, res) => {
 
    try{
