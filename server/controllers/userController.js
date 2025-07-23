@@ -2,7 +2,7 @@
 Este modulo se encarga de corroborar que el ususario que ingrese sea el
 mismo que esta registrado en nuestra base de datos.
 */
-const User = require('models/User');
+const User = require('../models/User');
 
 const getProfile = async (req, res) => {
     try{

@@ -18,6 +18,7 @@ const login = async (req, res) => {
    const user = await User.findByEmail(email);
    if (!user) return res.status(404).json({error:"Usuario no encontrado"});
 
+
    //Comparar contraseñas usando bcrypt
    const isPasswordCorrect = await bcrypt.compare(password, user.password);
    if(!isPasswordCorrect) return res.status(401).json({error:"Contraseña incorrecta"});

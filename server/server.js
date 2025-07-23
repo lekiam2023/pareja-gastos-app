@@ -9,6 +9,7 @@ const authRoutes = require('./routes/authRoutes');
 const gastosRoutes = require('./routes/gastoRoutes');
 const pagarRoutes = require('./routes/pagarRoutes');
 const registerRoutes = require('./routes/registerRoutes');
+const userRoutes = require('./routes/userRoutes');
 
 const app = express();
 
@@ -22,7 +23,8 @@ app.use(express.json());
 //Rutas
 app.use('/api/register', registerRoutes);
 
-app.use('/api/login', authRoutes);
+app.use('/api/user', userRoutes);
+app.use('/api', authRoutes);
 app.use('/api/gastos', gastosRoutes);
 app.use('/api/pagar', pagarRoutes);
 
