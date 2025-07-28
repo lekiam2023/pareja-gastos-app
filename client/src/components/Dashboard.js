@@ -5,7 +5,7 @@ function Dashboard(){
     };
     return(
         <div>
-            <h2>Bienvenido al Dashboard</h2>
+            <h2 style={{color: 'red'}}>Bienvenido al Dashboard</h2>
             <button onClick={handleLogout}>Cerrar Sesíon</button>
         </div>
     );

@@ -1,9 +1,9 @@
 /*Este componente protegerá rutas que necesitan login (como /dashboard).*/
 import {Navigate} from 'react-router-dom';
 
-const PrivateRoute = ({ Children }) =>{
+const PrivateRoute = ({ children }) =>{
     const token = localStorage.getItem('token');
-     return token ? Children : <Navigate to="/login" />;
+     return token ? children : <Navigate to="/login" />;
 };
 
 export default PrivateRoute;

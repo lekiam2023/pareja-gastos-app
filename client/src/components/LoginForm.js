@@ -20,6 +20,7 @@ function LoginForm(){
         setError('Credenciales invalidas');
      } 
   };
+
     return (
         <form onSubmit={handleLogin}>
            <input type="email" value={email} onChange={(e) =>setEmail(e.target.value)} placeholder="Correo" required />
