@@ -8,16 +8,26 @@ const { createToken } = require('../utils/jwt');//Aca importamos el JSON WEB TOK
 const User = require('../models/User');//Importamos los usuarios extraidos por las query de la base de datos
 
 
+/*
+Recibimos la peticion POST {correo, password} del frontend de React
+
+-Nosotros respondemos con un token si la contraseña y el correo esta en nuestras bases de datos
+*/
+
+
 //Funcion asincrona que recibe una promesa del modulo de model/User
 const login = async (req, res) => {
 
    try{
    const {email, password} = req.body;
 
+   console.log(email);
+   console.log(password);
+
    //Buscar al usuario por email
+  /*{COMENTARIO PARA TESTING: VALOR ESPERADO DE User: No falsy}*/
    const user = await User.findByEmail(email);
    if (!user) return res.status(404).json({error:"Usuario no encontrado"});
-
 
    //Comparar contraseñas usando bcrypt
    const isPasswordCorrect = await bcrypt.compare(password, user.password);
