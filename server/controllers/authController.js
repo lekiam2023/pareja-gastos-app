@@ -19,10 +19,11 @@ Recibimos la peticion POST {correo, password} del frontend de React
 const login = async (req, res) => {
 
    try{
-   const {email, password} = req.body;
+   const {email, password, name} = req.body;
 
    console.log(email);
    console.log(password);
+   console.log(name);
 
    //Buscar al usuario por email
   /*{COMENTARIO PARA TESTING: VALOR ESPERADO DE User: No falsy}*/
