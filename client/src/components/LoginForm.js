@@ -16,7 +16,7 @@ function LoginForm(){
         const res = await API.post('/api/login', {email, password, name });
         //Guardamos token en LocalStorage
         localStorage.setItem('token', res.data.token);
-        localStorage.setItem('user', JSON.stringify(res.data.u));
+        localStorage.setItem('user', JSON.stringify(res.data.user));
         navigate('/dashboard');//Redirige al dashboard 
      }catch(err){
         setError('Credenciales invalidas');
