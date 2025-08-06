@@ -27,16 +27,16 @@ function RegisterForm(){
     };
 
     return (
-        <div style={{maxWidth: 300, margin:'auto'}}>
-         <h2>Registro de Usuario</h2>
-         <form onSubmit={handleRegister}>
+        <div style={styles.container}>
+         <form onSubmit={handleRegister} style={styles.form}>
+             <h2 style={styles.title}>Registro de Usuario</h2>
              <input 
             type="text"
             placeholder="Nombre"
             value={nombre}
             onChange={(e) => setNombre(e.target.value)}
             required
-            style={{width: '100%', marginBottom: '10px'}}
+            style={styles.input}
             />
             <input 
             type="email"
@@ -44,7 +44,7 @@ function RegisterForm(){
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            style={{width: '100%', marginBottom: '10px'}}
+            style={styles.input}
             />
             <input 
                type="password"
@@ -52,16 +52,63 @@ function RegisterForm(){
                value={password}
                onChange={(e) => setPassword(e.target.value)}
                required
-               style={{width: '100%', marginBottom: '10px'}}
+               style={styles.input}
             /> 
-            <button type="submit" style={{width:'100%'}}>
+            <button type="submit" style={styles.button}>
                 Registrarse
             </button>
          </form>
-         {mensaje && <p style={{color:'green'}}>{mensaje}</p>}
-         {error && <p style={{color:'red'}}>{error}</p>}
+         {mensaje && <p style={styles.mensaje}>{mensaje}</p>}
+         {error && <p style={styles.error}>{error}</p>}
         </div>
     );
-}
+};
+    const styles ={
+   container:{
+      minHeight: '100vh',
+      display: 'flex',
+      justifyContent: 'center',
+      background: '#f3f4f6',
+   },
+   form:{
+      background: '#fff',
+      padding: '30px',
+      borderRadius: '8px',
+      boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+      width: '100%',
+      maxWidth: '400px',
+      display: 'flex',
+      flexDirection: 'column',
+   },
+   title:{
+      marginBottom: '2px',
+      textAling: 'center',
+      color: '#333',
+   },
+   input:{
+      padding: '12px',
+      marginBottom: '15px',
+      borderRadius: '5px',
+      border: '1px solid #ccc',
+      fontSize: '16px',
+   },
+   button:{
+      padding: '12px',
+      backgroundColor: '#4f46e5',
+      color: '#fff',
+      border: 'none',
+      borderRadius: '5px',
+      fontSize: '16px',
+      cursor: 'pointer',
+   },
+   mensaje:{
+      color:'green'
+   },
+   error:{
+      marginTop: '10px',
+      color: 'red',
+      textAling: 'center',
+   },
+ };
 
 export default RegisterForm;
