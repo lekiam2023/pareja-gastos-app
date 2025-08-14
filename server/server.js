@@ -15,7 +15,7 @@ const app = express();
 
 /*Middlewares Globales*/
 app.use(cors({
-    origin:'http://localhost:3000'
+    origin:'*',
 }));
 app.use(express.json());
 
@@ -29,7 +29,7 @@ app.use('/api/gastos', gastosRoutes);
 app.use('/api/pagar', pagarRoutes);
 
 const PORT = process.env.PORT || 4000;
-app.listen(PORT, () =>{
+app.listen(PORT, "0.0.0.0", () =>{
     console.log(`Servidor corriendo en el puerto ${PORT}`);
 });
 
