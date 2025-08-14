@@ -1,0 +1,42 @@
+version: ""
+
+services:
+  backend:
+    build:
+      context: ../server  #Ruta relativa al compose 
+      dockerfile: ../docker/backend.Dockerfile
+    container_name: backend
+    ports:
+      - "4000:4000"
+    env_file:
+      - ../server/.env
+    depends_on:
+      - db
+
+  frontend:
+     build:
+        context: ../client  
+        dockerfile: ../docker/frontend.Dockerfile
+     container_name: frontend
+     ports:
+      - "3000:3000"
+     depends_on:
+      - backend
+
+
+  db:
+     image: mysql:8.0
+     container_name: mysql
+     restart: always
+     environment:
+       MYSQL_ROOT_PASSWORD: Lapalma2022*
+       MYSQL_DATABASE: pareja_app
+     ports:
+       - "3306:3306"
+     volumes:
+       - mysql_data:/var/lib/mysql
+       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+   mysql_data:    
+
