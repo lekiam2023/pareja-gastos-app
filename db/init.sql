@@ -38,14 +38,13 @@ CREATE TABLE pagos(
     FOREIGN KEY (user_destino) REFERENCES users(id)
 );
 
-DROP TABLE pagos;
-DROP TABLE gastos;
-
-INSERT INTO users (nombre, email, password, rol) VALUES 
-('Jose','Jose@gmail.com','12345678', 'user');
 
 
-INSERT INTO gastos (user_id, descripcion, monto, fecha) VALUES
-(8,'Retrovisor',80.40,'2025-03-05');
 
-SELECT * from gastos ;
+
+
+
+
+SELECT * from users;
+
+DELETE FROM users WHERE id=2;
