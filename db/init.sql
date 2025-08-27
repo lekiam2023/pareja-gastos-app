@@ -37,14 +37,3 @@ CREATE TABLE pagos(
     FOREIGN KEY (user_origin) REFERENCES users(id),
     FOREIGN KEY (user_destino) REFERENCES users(id)
 );
-
-
-
-
-
-
-
-
-SELECT * from users;
-
-DELETE FROM users WHERE id=2;

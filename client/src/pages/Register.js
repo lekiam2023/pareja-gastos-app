@@ -2,7 +2,7 @@ import RegisterForm from "../components/RegisterFormForm";
 
 function Register(){
     return(
-        <div style={{maxWidth:'400px', margin:'auto'}}>
+        <div className="flex items-center ">
             <h1>Registro</h1>
             <RegisterForm />
         </div>

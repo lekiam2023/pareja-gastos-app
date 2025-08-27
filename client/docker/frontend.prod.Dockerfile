@@ -12,6 +12,10 @@ RUN npm install
 #Copiamos todo el codigo del frontend
 COPY . .
 
+#Recibir la variable desde docker-compose build args
+ARG REACT_APP_URL
+ENV REACT_APP_API_URL=$REACT_APP_URL
+
 #Construir la app para produccion
 RUN npm run build 
 
@@ -22,7 +26,7 @@ FROM nginx:1.25-alpine
 COPY --from=build /app/build /usr/share/nginx/html
 
 #Configuracion de Nginx para React
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY docker/nginx.conf /etc/nginx/conf.d/default.conf
 #Exponemos el puerto donde corre React
 EXPOSE 80
 

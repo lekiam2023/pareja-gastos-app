@@ -5,13 +5,21 @@ function Dashboard(){
  const [username, setUserName] = useState('Usuario');
 
   useEffect(() =>{
-  //Simulacion obtencion de datos del usuario (Podemos adaptar con un endpoint real)
-    const storedUser = JSON.parse(localStorage.getItem('user'));
-       if (storedUser?.nombre){
-          setUserName(storedUser.nombre);
+
+    const userData = localStorage.getItem('user');
+
+    if(userData){
+        try{
+           const storedUser = JSON.parse(localStorage.getItem('user'));
+             if (storedUser?.nombre){
+                setUserName(storedUser.nombre);
+            
        }
-    },[]);
-          
+        }catch(error){
+            console.log("Error al parsear el usuario:", error);
+        }
+    }
+}, []);
 
     const handleLogout = () =>{
         localStorage.removeItem('token');

@@ -18,7 +18,7 @@ app.use(cors({
     origin:'*',
 }));
 app.use(express.json());
-
+console.log(process.env.REACT_APP_API_URL)
 
 //Rutas
 app.use('/api/register', registerRoutes);

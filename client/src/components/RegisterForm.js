@@ -1,114 +1,91 @@
 import { useState } from "react";
-import API from '../services/api';
+import axios from "axios";
 
+// Crea la instancia de API usando la variable de entorno
+const API = axios.create({
+  baseURL: process.env.REACT_APP_API_URL || "http://localhost:4000",
+});
 
-function RegisterForm(){
-     const [nombre, setNombre] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [mensaje, setMensaje] = useState('');
-    const [error, setError] = useState('');
-    
-    const handleRegister = async (e) =>{
-        e.preventDefault();
-        setMensaje('');
-        setError('');
+function RegisterForm() {
+  const [nombre, setNombre] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [mensaje, setMensaje] = useState("");
+  const [error, setError] = useState("");
 
-        try{
-            const res = await API.post('/api/register', {nombre, email, password});
-            setMensaje('¡Usuario registrado exitosamente!');
-            console.log('Respuesta:',res.data);
+  // DEBUG: verificar que la URL es la correcta
+  console.log("API URL:", process.env.REACT_APP_API_URL);
 
-            //Guardamos el Token 
-            localStorage.setItem('token', res.data.token);
-        }catch(err){
-            setError('Error al registrar. Intenta con otro correo.');
-        }
-    };
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    setMensaje("");
+    setError("");
 
-    return (
-        <div style={styles.container}>
-         <form onSubmit={handleRegister} style={styles.form}>
-             <h2 style={styles.title}>Registro de Usuario</h2>
-             <input 
-            type="text"
-            placeholder="Nombre"
-            value={nombre}
-            onChange={(e) => setNombre(e.target.value)}
-            required
-            style={styles.input}
-            />
-            <input 
-            type="email"
-            placeholder="Correo"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            style={styles.input}
-            />
-            <input 
-               type="password"
-               placeholder="Contraseña"
-               value={password}
-               onChange={(e) => setPassword(e.target.value)}
-               required
-               style={styles.input}
-            /> 
-            <button type="submit" style={styles.button}>
-                Registrarse
-            </button>
-         </form>
-         {mensaje && <p style={styles.mensaje}>{mensaje}</p>}
-         {error && <p style={styles.error}>{error}</p>}
-        </div>
-    );
-};
-    const styles ={
-   container:{
-      minHeight: '100vh',
-      display: 'flex',
-      justifyContent: 'center',
-      background: '#f3f4f6',
-   },
-   form:{
-      background: '#fff',
-      padding: '30px',
-      borderRadius: '8px',
-      boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-      width: '100%',
-      maxWidth: '400px',
-      display: 'flex',
-      flexDirection: 'column',
-   },
-   title:{
-      marginBottom: '2px',
-      textAling: 'center',
-      color: '#333',
-   },
-   input:{
-      padding: '12px',
-      marginBottom: '15px',
-      borderRadius: '5px',
-      border: '1px solid #ccc',
-      fontSize: '16px',
-   },
-   button:{
-      padding: '12px',
-      backgroundColor: '#4f46e5',
-      color: '#fff',
-      border: 'none',
-      borderRadius: '5px',
-      fontSize: '16px',
-      cursor: 'pointer',
-   },
-   mensaje:{
-      color:'green'
-   },
-   error:{
-      marginTop: '10px',
-      color: 'red',
-      textAling: 'center',
-   },
- };
+    try {
+      const res = await API.post("/api/register", { nombre, email, password });
+      setMensaje("¡Usuario registrado exitosamente!");
+      localStorage.setItem("token", res.data.token);
+      setNombre("");
+      setEmail("");
+      setPassword("");
+    } catch (err) {
+      if (err.response && err.response.data && err.response.data.error) {
+        setError(err.response.data.error);
+      } else if (err.message) {
+        setError(`Error de conexión: ${err.message}`);
+      } else {
+        setError("Error desconocido al registrar. Intenta nuevamente.");
+      }
+    }
+  };
+
+  return (
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <form
+        onSubmit={handleRegister}
+        className="bg-white p-8 rounded-lg shadow-md w-full max-w-md flex flex-col"
+      >
+        <h2 className="text-2xl font-bold mb-6 text-center">Registro de Usuario</h2>
+
+        <input
+          type="text"
+          placeholder="Nombre"
+          value={nombre}
+          onChange={(e) => setNombre(e.target.value)}
+          required
+          className="p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        />
+
+        <input
+          type="email"
+          placeholder="Correo"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          className="p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        />
+
+        <input
+          type="password"
+          placeholder="Contraseña"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+          className="p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        />
+
+        <button
+          type="submit"
+          className="p-3 bg-indigo-600 text-white font-semibold rounded hover:bg-indigo-700 transition-colors"
+        >
+          Registrarse
+        </button>
+
+        {mensaje && <p className="text-green-600 mt-4 text-center">{mensaje}</p>}
+        {error && <p className="text-red-600 mt-4 text-center">{error}</p>}
+      </form>
+    </div>
+  );
+}
 
 export default RegisterForm;

@@ -1,15 +1,13 @@
-/*  ---- Capa Logica De Negocio -----
-   
+/*  ---- Capa Logica De Negocio -----*/
 
-
+/*Lo que hace este modulo es encargarse de la validacion de inicion de secion
 */
 const bcrypt = require('bcryptjs');//Importamos libreria para que las contraseñas sen hasheadas y protegidas al mezclarse con el "sal" 
 const { createToken } = require('../utils/jwt');//Aca importamos el JSON WEB TOKEN, para que los usuarios que ingresen tengan un TOKEN de seguridad
 const User = require('../models/User');//Importamos los usuarios extraidos por las query de la base de datos
 
-
 /*
-Recibimos la peticion POST {correo, password} del frontend de React
+Recibimos la peticion POST {correo, password, nombre} del frontend de React
 
 -Nosotros respondemos con un token si la contraseña y el correo esta en nuestras bases de datos
 */
@@ -19,6 +17,7 @@ Recibimos la peticion POST {correo, password} del frontend de React
 const login = async (req, res) => {
 
    try{
+   //Desestructuracion de objeto: Recibe valores del cuerpo HTTP POST
    const {email, password, name} = req.body;
 
    console.log(email);
@@ -26,11 +25,19 @@ const login = async (req, res) => {
    console.log(name);
 
    //Buscar al usuario por email
-  /*{COMENTARIO PARA TESTING: VALOR ESPERADO DE User: No falsy}*/
+  /*{COMENTARIO PARA TESTING: VALOR ESPERADO DE User: truthy No falsy}*/
    const user = await User.findByEmail(email);
    if (!user) return res.status(404).json({error:"Usuario no encontrado"});
+   
 
-   //Comparar contraseñas usando bcrypt
+   /*Comparar contraseñas usando bcrypt 
+   bcrypt. compare (password: string, hash: string): Promise<boolean>
+      compara de forma asincrónica una contraseña con un hash.
+
+    --- Claro aca se supone que ya la contraseña ya esta haseadad, por 
+    eso la comparcion del password recibido por POST y el del hash de la base de datos
+
+   */
    const isPasswordCorrect = await bcrypt.compare(password, user.password);
    if(!isPasswordCorrect) return res.status(401).json({error:"Contraseña incorrecta"});
 

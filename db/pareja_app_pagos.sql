@@ -16,13 +16,25 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Dumping data for table `pagos`
+-- Table structure for table `pagos`
 --
 
-LOCK TABLES `pagos` WRITE;
-/*!40000 ALTER TABLE `pagos` DISABLE KEYS */;
-/*!40000 ALTER TABLE `pagos` ENABLE KEYS */;
-UNLOCK TABLES;
+DROP TABLE IF EXISTS `pagos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `pagos` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_origin` int NOT NULL,
+  `user_destino` int NOT NULL,
+  `monto` decimal(10,2) NOT NULL,
+  `generado_en` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `user_origin` (`user_origin`),
+  KEY `user_destino` (`user_destino`),
+  CONSTRAINT `pagos_ibfk_1` FOREIGN KEY (`user_origin`) REFERENCES `users` (`id`),
+  CONSTRAINT `pagos_ibfk_2` FOREIGN KEY (`user_destino`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -33,4 +45,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-08-17 19:50:26
+-- Dump completed on 2025-08-17 20:22:59
