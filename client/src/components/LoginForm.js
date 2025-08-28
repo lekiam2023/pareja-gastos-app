@@ -24,9 +24,9 @@ function LoginForm(){
   };
 
     return(
-      <div style={styles.container}>
-        <form onSubmit={handleLogin} style={styles.form}>
-          <h2 style={styles.title}>Iniciar Sesión</h2>
+      <div className="flex items-center justify-center min-h-screen bg-gray-100">
+        <form className="w-72 md:w-96 bg-white p-6 rounded-2xl shadow-lg" onSubmit={handleLogin}>
+          <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">Iniciar Sesión</h2>
 
            <input
             type="text" 
@@ -34,15 +34,16 @@ function LoginForm(){
             onChange={(e) => setName(e.target.value)}
             placeholder="Nombre"
             required
-            style={styles.input}
+            className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
          />
 
            <input type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Correo electronico"
-            required 
-            style={styles.input}
+            required
+            className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+ 
          />
 
            <input type="password"
@@ -50,59 +51,16 @@ function LoginForm(){
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Contraseña"
             required
-            style={styles.input}
-          />
-           <button type="submit" style={styles.button}>Entrar</button>
+            className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
 
-           {error && <p style={styles.error}>{error}</p>}
+          />
+           <button type="submit"
+           className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition duration-200"
+           >Entrar</button>
+
+           {error && <p className="mt-4 text-red-500 text-sm text-center">{error}</p>}
         </form>
         </div>
      );
 }
-
-const styles ={
-   container:{
-      minHeight: '100vh',
-      display: 'flex',
-      justifyContent: 'center',
-      background: '#f3f4f6',
-   },
-   form:{
-      background: '#fff',
-      padding: '30px',
-      borderRadius: '8px',
-      boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-      width: '100%',
-      maxWidth: '400px',
-      display: 'flex',
-      flexDirection: 'column',
-   },
-   title:{
-      marginBottom: '2px',
-      textAling: 'center',
-      color: '#333',
-   },
-   input:{
-      padding: '12px',
-      marginBottom: '15px',
-      borderRadius: '5px',
-      border: '1px solid #ccc',
-      fontSize: '16px',
-   },
-   button:{
-      padding: '12px',
-      backgroundColor: '#4f46e5',
-      color: '#fff',
-      border: 'none',
-      borderRadius: '5px',
-      fontSize: '16px',
-      cursor: 'pointer',
-   },
-   error:{
-      marginTop: '10px',
-      color: 'red',
-      textAling: 'center',
-   },
-};
-
 export default LoginForm;
