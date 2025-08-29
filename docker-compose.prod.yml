@@ -1,0 +1,22 @@
+services:
+  backend:
+    environment:
+      - NODE_ENV=production
+
+frontend:
+  build:
+    context: ./client
+    dockerfile: docker/frontend.prod.Dockerfile
+    args:
+      REACT_APP_URL: ${FRONTEND_API_URL}
+
+  container_name: frontend-prod
+
+  ports:
+    - "3000:80"
+
+  env_file:
+    - ./client/.env.production  
+
+  depends_on:
+    - backend          

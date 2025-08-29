@@ -7,41 +7,26 @@ services:
       dockerfile: backend.Dockerfile
     container_name: backend    
     ports:
-      - "4000:4000"
+      - "${BACKEND_PORT}:4000"
     env_file:
-      - ./server/.env
+      - ./config/.env.dev
     depends_on:
       - db
    
-
-  frontend-prod:
-    build:
-       context: ./client
-       dockerfile: docker/frontend.prod.Dockerfile
-       args:
-         REACT_APP_URL: ''
-    container_name: frontend-prod     
-    ports:
-      - "3000:80" 
-    depends_on:
-      - backend
-         
-
      
   db:
      image: mysql:8.0
      container_name: mysql
      restart: always
      environment:
-       MYSQL_ROOT_PASSWORD: Lapalma2022*
-       MYSQL_DATABASE: pareja_app
+       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+       MYSQL_DATABASE: ${DB_NAME}
      ports:
        - "3306:3306"
      volumes:
-       - ./db:/docker-entrypoint-initdb.d/init.sql
        - mysql_data:/var/lib/mysql
+       - ./db:/docker-entrypoint-initdb.d
        
-
 volumes:
    mysql_data:    
 

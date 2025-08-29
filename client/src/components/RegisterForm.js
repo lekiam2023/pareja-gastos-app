@@ -43,8 +43,7 @@ function RegisterForm() {
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <form
         onSubmit={handleRegister}
-        className="bg-white p-8 rounded-lg shadow-md w-full max-w-md flex flex-col"
-      >
+        className="w-72 md:w-96 bg-white p-6 rounded-2xl shadow-lg"      >
         <h2 className="text-2xl font-bold mb-6 text-center">Registro de Usuario</h2>
 
         <input
@@ -53,7 +52,8 @@ function RegisterForm() {
           value={nombre}
           onChange={(e) => setNombre(e.target.value)}
           required
-          className="p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          
         />
 
         <input
@@ -62,7 +62,7 @@ function RegisterForm() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-          className="p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
 
         <input
@@ -71,12 +71,12 @@ function RegisterForm() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
-          className="p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
 
         <button
           type="submit"
-          className="p-3 bg-indigo-600 text-white font-semibold rounded hover:bg-indigo-700 transition-colors"
+           className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition duration-200"
         >
           Registrarse
         </button>

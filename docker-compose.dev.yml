@@ -1,0 +1,17 @@
+services:
+  backend:
+    environment:
+       - NODE_ENV=development
+
+  frontend:
+    build:
+      context: ./client
+      dockerfile: docker/frontend.dev.Dockerfile
+    container_name: frontend-dev
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./client/.env.development
+
+    depends_on:
+      - backend       
