@@ -4,6 +4,7 @@ import RegisterForm from './components/RegisterForm';
 import Dashboard from './components/Dashboard';
 import PrivateRoute from './routes/PrivateRoute';
 
+
 function App() {
   return (
       <Router>
