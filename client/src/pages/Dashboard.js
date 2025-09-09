@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Card from "./CardView";
+import Card from "../components/CardView";
 import Dashboard2 from "./NewDashboard";
 
 function Dashboard() {

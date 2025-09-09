@@ -1,41 +1,23 @@
 import { useState } from "react";
-import axios from "axios";
-
-// Crea la instancia de API usando la variable de entorno
-const API = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || "http://localhost:4000",
-});
+import { register } from "../../services/authService";
 
 function RegisterForm() {
-  const [nombre, setNombre] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [form, setForm] = useState({nombre: "", email: "", password: ""});
   const [mensaje, setMensaje] = useState("");
   const [error, setError] = useState("");
 
-  // DEBUG: verificar que la URL es la correcta
-  console.log("API URL:", process.env.REACT_APP_API_URL);
+  const handleChange = (e) => {
+       setForm({...form, [e.target.name]: e.target.value });
+    };
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    setMensaje("");
-    setError("");
-
     try {
-      const res = await API.post("/api/register", { nombre, email, password });
+      const res = await register(form);
       setMensaje("¡Usuario registrado exitosamente!");
       localStorage.setItem("token", res.data.token);
-      setNombre("");
-      setEmail("");
-      setPassword("");
     } catch (err) {
-      if (err.response && err.response.data && err.response.data.error) {
-        setError(err.response.data.error);
-      } else if (err.message) {
-        setError(`Error de conexión: ${err.message}`);
-      } else {
-        setError("Error desconocido al registrar. Intenta nuevamente.");
-      }
+      setError(err.response?.data?.error || "Error al registrar"); 
     }
   };
 

@@ -50,7 +50,7 @@ const login = async (req, res) => {
       nombre: user.nombre,
       role: user.rol
    }
- });
+ });º
 }catch(err){
    console.log('Error en login:', err);
    res.status(500).json({error:'Error interno del servidor'})

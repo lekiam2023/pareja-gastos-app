@@ -1,24 +1,26 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import API from '../services/api';
+import API from '../../services/authService';
 
 function LoginForm(){
-   const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [form, setForm] = useState({name: "", email: "", password: ""});
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
+
+    const handleChange = (e) =>{
+      setForm({...form, [e.target.name]: e.target.value});
+    };
+
     const handleLogin = async (e) => {
         e.preventDefault();
-        setError('');
      try{
-        const res = await API.post('/api/login', {email, password, name });
+        const res = await login(form);
         //Guardamos token en LocalStorage
         localStorage.setItem('token', res.data.token);
         localStorage.setItem('user', JSON.stringify(res.data.user));
         navigate('/dashboard');//Redirige al dashboard 
-     }catch(err){
+     }catch {
         setError('Credenciales invalidas');
      } 
   };
@@ -51,6 +53,7 @@ function LoginForm(){
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Contraseña"
             required
+            autoComplete="curret-password"
             className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
 
           />

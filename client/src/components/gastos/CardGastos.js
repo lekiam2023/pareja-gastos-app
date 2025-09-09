@@ -1,4 +1,4 @@
-import { useState} from "react";
+import { useState} from "react";/*___*/
 
 function ConsultarGastos(){
     //Simulacion de gastos ficticios
@@ -6,7 +6,7 @@ function ConsultarGastos(){
         {id: 1, fecha: "2025-09-01", categoria: "Comida", descripcion: "Restaurante", monto:25.5},
         {id: 2, fecha: "2025-09-03", categoria: "Transporte", descripcion: "Taxi", monto: 15},
         {id: 3, fecha: "2025-09-05", categoria: "Supermercado", descripcion: "Compras", monto: 80.75},
-     ]);
+     ]);/*___*/
 
      const total = gastos.reduce((sum, gasto) => sum + gasto.monto, 0);
 
