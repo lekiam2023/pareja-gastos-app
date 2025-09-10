@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Card from "../components/CardView";
-import ConsultarGastos from "../src/gastos/CardGastos";
-import CargarGastos from "../src/components/gastos/CargarGastos";
+import Card from "../../src/components/CardView";
+import ConsultarGastos from "../components/gastos/CardGastos";
+import CargarGastos from "../components/gastos/CargarGastos";
 
 function Dashboard2() {
   const [menuOpen, setMenuOpen] = useState(true); // para plegar/desplegar

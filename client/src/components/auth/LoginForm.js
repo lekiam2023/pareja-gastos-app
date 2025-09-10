@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import API from '../../services/authService';
+import { login } from '../../services/authService';
 
 function LoginForm(){
-    const [form, setForm] = useState({name: "", email: "", password: ""});
+    const [form, setForm] = useState({ name: "", email: "", password: "" });
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
 
     const handleChange = (e) =>{
-      setForm({...form, [e.target.name]: e.target.value});
+      setForm({ ...form, [e.target.name]: e.target.value});
     };
 
     const handleLogin = async (e) => {
@@ -32,29 +32,34 @@ function LoginForm(){
 
            <input
             type="text" 
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            name="name"
+            value={form.name}
+            onChange={handleChange}
             placeholder="Nombre"
             required
             className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
          />
 
-           <input type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+           <input 
+            type="email"
+            name="email"
+            value={form.email}
+            onChange={handleChange}
             placeholder="Correo electronico"
             required
             className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
  
          />
 
-           <input type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Contraseña"
-            required
-            autoComplete="curret-password"
-            className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+           <input 
+             type="password"
+             name="password"
+             value={form.password}
+             onChange={handleChange}
+             placeholder="Contraseña"
+             required
+             autoComplete="curret-password"
+             className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
 
           />
            <button type="submit"

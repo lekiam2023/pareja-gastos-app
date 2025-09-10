@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {createGasto, uploadGastosExcel} from "../../services/gastosService";
+import {getGastos, createGasto, uploadGastosExcel} from "../../services/gastosService";
 
 function CargarGastos(){
     const [form , setForm] = useState({
@@ -24,7 +24,7 @@ function CargarGastos(){
        setMensaje("");
        setError("");
        try{
-          await createGasto(from);
+          await createGasto(form);
           setMensaje("Gasto guardado correctamente");
           setForm({
             fecha: "",
@@ -81,8 +81,9 @@ return(
          />
 
          <select 
-           name="" 
-           id="" 
+           name="categoria" 
+           value={form.categoria}
+           onChange={handleChange}
            className="border rounded px-3 py-2 text-sm w-full"
            required
            >
@@ -96,6 +97,7 @@ return(
            type="text"
            name="descripcion"
            value={form.descripcion}
+           onChange={handleChange}
            placeholder="Descripcion"
            className="border rounded px-3 py-2 text-sm w-full"
            required 
@@ -147,7 +149,7 @@ return(
             </button>
         </div>
 
-        {/* Mensajes */}ç
+        {/* Mensajes */}
         {mensaje && <p className="text-green-600">{mensaje}</p>}
         {error && <p className="text-red-600">{error}</p>}
     </div> 

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { register } from "../../services/authService";
 
 function RegisterForm() {
-  const [form, setForm] = useState({nombre: "", email: "", password: ""});
+  const [form, setForm] = useState({ nombre: "", email: "", password: "" });
   const [mensaje, setMensaje] = useState("");
   const [error, setError] = useState("");
 
@@ -30,9 +30,10 @@ function RegisterForm() {
 
         <input
           type="text"
+          name="nombre"
           placeholder="Nombre"
-          value={nombre}
-          onChange={(e) => setNombre(e.target.value)}
+          value={form.nombre}
+          onChange={handleChange}
           required
           className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           
@@ -40,18 +41,20 @@ function RegisterForm() {
 
         <input
           type="email"
+          name="email"
           placeholder="Correo"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={form.email}
+          onChange={handleChange}
           required
           className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
 
         <input
           type="password"
+          name="password"
           placeholder="Contraseña"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={form.password}
+          onChange={handleChange}
           required
           className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         />

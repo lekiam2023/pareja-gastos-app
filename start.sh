@@ -38,13 +38,13 @@ echo "Cambiando a la rama $BRANCH..."
 git fetch
 
 git checkout $BRANCH
- if [$? -ne 0]; then 
+ if [ $? -ne 0 ]; then 
   echo "Error: No se pudo cambiar a la rama $BRANCH"
   exit 1
  fi  
 
 git pull origin $BRANCH
- if [$? -ne 0]; then
+ if [ $? -ne 0 ]; then
   echo "Error: No se pudo hacer pull de $BRACNCH"
   exit 1
  fi 
@@ -62,7 +62,7 @@ echo "Levantando entorno: $ENV..."
 docker-compose $COMPOSE_FILE --env-file $ENV_FILE up --build -d
 
 #Verifica si falló
-if [$? -ne 0];then
+if [ $? -ne 0 ];then
   echo "Error: No se pudieron levantar los contenedores"
   exit 1 
 fi

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import Card from "../components/CardView";
-import Dashboard2 from "./NewDashboard";
+import Dashboard2 from "../layout/DashboardLayout";
+
+
 
 function Dashboard() {
   const [username, setUserName] = useState("Usuario");

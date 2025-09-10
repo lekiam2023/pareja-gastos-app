@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import LoginForm from './components/LoginForm';
-import RegisterForm from './components/RegisterForm';
-import Dashboard from './components/Dashboard';
-import PrivateRoute from './routes/PrivateRoute';
+import LoginForm from './components/auth/LoginForm';
+import RegisterForm from './components/auth/RegisterForm';
+import Dashboard from '../src/pages/Dashboard';
+import PrivateRoute from '../src/routes/PrivateRoute';
 
 
 function App() {
