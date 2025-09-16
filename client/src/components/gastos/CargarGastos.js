@@ -24,8 +24,11 @@ function CargarGastos(){
        setMensaje("");
        setError("");
        try{
-          await createGasto(form);
+          const { data } = await createGasto(form);
           setMensaje("Gasto guardado correctamente");
+
+          if (onAdd) onAdd(data);// notifica al padre si existe
+
           setForm({
             fecha: "",
             categoria: "",

@@ -1,15 +1,12 @@
-import { useState} from "react";/*___*/
+import { useEffect, useState } from "react";
+import {getGastos} from "../../services/gastosService";
+import CargarGastos from "./CargarGastos";
+import CardGastos from "./CardGastos";
 
-function ConsultarGastos(){
-    //Simulacion de gastos ficticios
-     const [gastos] = useState([
-        {id: 1, fecha: "2025-09-01", categoria: "Comida", descripcion: "Restaurante", monto:25.5},
-        {id: 2, fecha: "2025-09-03", categoria: "Transporte", descripcion: "Taxi", monto: 15},
-        {id: 3, fecha: "2025-09-05", categoria: "Supermercado", descripcion: "Compras", monto: 80.75},
-     ]);/*___*/
 
-     const total = gastos.reduce((sum, gasto) => sum + gasto.monto, 0);
-
+export default function CardGastos({ gastos = [] }){
+    const total = gastos.reduce((acc, g) => acc + Number(g.monto), 0);
+   
      return(
       <div className="space-y-6">
          {/*Encabezado*/}
@@ -78,5 +75,3 @@ function ConsultarGastos(){
       </div>
      );
   }
-
-  export default ConsultarGastos;
