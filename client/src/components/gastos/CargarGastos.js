@@ -1,7 +1,7 @@
 import { useState } from "react";
-import {getGastos, createGasto, uploadGastosExcel} from "../../services/gastosService";
+import {getGastos, crearGasto, uploadGastosExcel} from "../../services/gastosService";
 
-function CargarGastos(){
+function CargarGastos({ onAdd }){
     const [form , setForm] = useState({
         fecha: "",
         categoria: "",
@@ -16,7 +16,11 @@ function CargarGastos(){
     
     const handleChange = (e) =>{
        const { name, value, type, checked } = e.target; 
-       setForm({ ...form, [name]: type === "checkbox" ? checked : value });
+         if(type === 'date'){
+          setForm({ ...form, [name]: value});
+         }else{
+           setForm({ ...form, [name]: type === "checkbox" ? checked : value});
+         }
     };
 
     const handleSubmitManual = async (e) => {
@@ -24,7 +28,7 @@ function CargarGastos(){
        setMensaje("");
        setError("");
        try{
-          const { data } = await createGasto(form);
+          const { data } = await crearGasto(form);
           setMensaje("Gasto guardado correctamente");
 
           if (onAdd) onAdd(data);// notifica al padre si existe

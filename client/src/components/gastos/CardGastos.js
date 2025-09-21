@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import {getGastos} from "../../services/gastosService";
 import CargarGastos from "./CargarGastos";
 import CardGastos from "./CardGastos";
+import { formatFecha } from "../../utils/date";
 
 
-export default function CardGastos({ gastos = [] }){
+export default function GastosTable({ gastos = [] }){
     const total = gastos.reduce((acc, g) => acc + Number(g.monto), 0);
-   
+
      return(
       <div className="space-y-6">
          {/*Encabezado*/}
@@ -55,11 +56,11 @@ export default function CardGastos({ gastos = [] }){
                <tbody>
                   {gastos.map((gasto) =>(
                     <tr key={gasto.id} className="border-b hover:bg-gray-50">
-                     <td className="px-4 py-2">{gasto.fecha}</td>
+                     <td className="px-4 py-2">{formatFecha(gasto.fecha)}</td>
                      <td className="px-4 py-2">{gasto.categoria}</td>
                      <td className="px-4 py-2">{gasto.descripcion}</td>
                      <td className="px-4 py-2 text-right font-semibold">
-                        {gasto.monto.toFixed(2)}
+                        {parseFloat(gasto.monto.toFixed(2))}
                      </td>
                   </tr>                    
                  ))}

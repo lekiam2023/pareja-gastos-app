@@ -3,26 +3,29 @@ import { useNavigate } from "react-router-dom";
 import { login } from '../../services/authService';
 
 function LoginForm(){
+   /*Declaraciones de las variables*/
     const [form, setForm] = useState({ name: "", email: "", password: "" });
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
-
+    /*Funcion encargada de obtener los datos del usuario*/
     const handleChange = (e) =>{
       setForm({ ...form, [e.target.name]: e.target.value});
     };
 
+    
     const handleLogin = async (e) => {
         e.preventDefault();
      try{
-        const res = await login(form);
+        const res = await login(form);/*POST ----> Al backend con los datos*/
         //Guardamos token en LocalStorage
-        localStorage.setItem('token', res.data.token);
+        localStorage.setItem('token', res.data.token);/**/
         localStorage.setItem('user', JSON.stringify(res.data.user));
         navigate('/dashboard');//Redirige al dashboard 
      }catch {
         setError('Credenciales invalidas');
      } 
+
   };
 
     return(
