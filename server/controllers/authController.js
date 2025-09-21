@@ -20,10 +20,6 @@ const login = async (req, res) => {
    //Desestructuracion de objeto: Recibe valores del cuerpo HTTP POST
    const {email, password, name} = req.body;
 
-   console.log(email);
-   console.log(password);
-   console.log(name);
-
    //Buscar al usuario por email
   /*{COMENTARIO PARA TESTING: VALOR ESPERADO DE User: truthy No falsy}*/
    const user = await User.findByEmail(email);
@@ -50,7 +46,7 @@ const login = async (req, res) => {
       nombre: user.nombre,
       role: user.rol
    }
- });º
+ });
 }catch(err){
    console.log('Error en login:', err);
    res.status(500).json({error:'Error interno del servidor'})

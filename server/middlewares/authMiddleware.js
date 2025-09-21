@@ -1,11 +1,14 @@
 const {verifyToken} = require('../utils/jwt');
 
 const authMiddleware = (req, res, next) => {
-    const token = req.headers.authorization?.split(" ")[1];
-      if(!token) return res.status(401).json({error:"Token faltante"});
+    console.log("Headers recibidos:", req.headers);
+    const tokenHeader = req.headers.authorization;
+    if (!tokenHeader) return res.status(401).json({error: "Token faltante"});
 
+    const token = tokenHeader.split(" ")[1];
       try{
         req.user = verifyToken(token);
+        console.log("Usuario verificado:", req.user);
         next();
       } catch (e){
         return res.status(403).json({error:"Token inválido"});
